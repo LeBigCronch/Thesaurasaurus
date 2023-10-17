@@ -8,8 +8,8 @@ int main(int argc, char *argv[]){
 		return -1;
 	}
 	
-	char *joe;
-	char recurse = 0;
+	char *joe; // there is no good reason for havaing named the input 'joe'
+	char recurse = 0; // if you don't put the input in during program call you can search for multiple words
 	if(argc > 1){
 		joe = argv[1];
 	} else {
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
 
 	char *command;
 	command = (char *) malloc(sizeof(joe) + sizeof("curl -s -o tmp-ths.txt https://www.merriam-webster.com/thesaurus/"));
-	strcpy(command, "curl -s -o tmp-ths.txt https://www.merriam-webster.com/thesaurus/");
+	strcpy(command, "curl -s -o tmp-ths.txt https://www.merriam-webster.com/thesaurus/"); // literally just append the input to this url, go there, and curl the contents
 	strcat(command, joe);
 	
 	system(command);
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]){
 	char clonk[512];
 	char count = 0;
 	while(fgets(clonk, 512, fp) != NULL){
-		if(count < 17){
+		if(count < 17){ //the words are usually on line 17 so that's where i go
 			count++;
 			continue;
 		}
@@ -42,15 +42,15 @@ int main(int argc, char *argv[]){
 		int start;
 		char line[512];
 
-		for(start = 0; clonk[start] != ':'; start++){}
-		for(int f = start; clonk[f] != ';'; f++){
-			line[f-start-2] = clonk[f];
+		for(start = 0; clonk[start] != ':'; start++); // no i don't know a better way to do this
+		for(int f = start; clonk[f] != ';'; f++){ 
+			line[f-start-2] = clonk[f]; 
 		}
 
 		puts(line);
 		break;
 	}
-	system("rm tmp-ths.txt");
+	system("rm tmp-ths.txt"); 
 	if(recurse)
 		main(1,&joe);
 }
