@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
 	free(command);
 
 	FILE *fp = fopen("tmp-ths.txt", "r");
-	char clonk[512];
+	char clonk[512]; //god knows why i named this variable "clonk"
 	char count = 0;
 	while(fgets(clonk, 512, fp) != NULL){
 		if(count < 17){ //the words are usually on line 17 so that's where i go
